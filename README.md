@@ -136,10 +136,10 @@ Create the virtual environment:
 `> virtualenv .myproject-env`
 
 Activate your virtual environment:
-`> source .project-env/bin/activate`
+`> source .myproject-env/bin/activate`
 
 Now install protobuf
-`(.project-env) > pip install protobuf`
+`(.myproject-env) > pip install protobuf`
 
 Now git clone or download ADAM.py to this directory and you can get started.
 
@@ -177,5 +177,5 @@ print new_header.matrixName
 
 Will output 'My Frist ADA-M Matrix'
 
-For more examples using Protocol Buffer with Python please [read the tutorial] (https://developers.google.com/protocol-buffers/docs/pythontutorial).
+For more examples using Protocol Buffer with Python please [read the tutorial](https://developers.google.com/protocol-buffers/docs/pythontutorial).
 
