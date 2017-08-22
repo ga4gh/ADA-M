@@ -8,7 +8,7 @@ This repository is focussed on providing an API implementation of ADA-M version 
 
 While ADA-M .proto file can be compiled to multiple languages, we currently provide the Python compiled version for demonstration purposes.
 
-##Overview of the ADA-M meta description sections
+## Overview of the ADA-M meta description sections
 
 ADA-M aims to help data custodians assign a discovery and access 'Profile' to their by stipulating formally and in a machine-readable way the conditions for access to these data. The following describes the four sections that comprise the fields according to ADA-M version 1.
 
@@ -124,7 +124,7 @@ The Meta-Conditions section is used to describe aspects of the data that have to
 
 ## Installation using Python
 
-We recommend setting up a virtual environment using virtualenv to contain all your python packages related to your project in its own environment but you can skip these steps.
+We recommend setting up a virtual environment using virtualenv to contain all your python packages related to your project in their own environment.
 
 Install globally with pip:
 `> pip install virtualenv`
