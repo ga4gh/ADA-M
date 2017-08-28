@@ -10,7 +10,7 @@ While ADA-M .proto file can be compiled to multiple languages, we currently prov
 
 ## Overview of the ADA-M meta description sections
 
-ADA-M aims to help data custodians assign a discovery and access 'Profile' to their by stipulating formally and in a machine-readable way the conditions for access to these data. The following describes the four sections that comprise the fields according to ADA-M version 1.
+ADA-M aims to help data custodians assign a discovery and access 'Profile' to their dataset by stipulating formally and in a machine-readable way the conditions for access to these data. The following describes the four sections that comprise the fields according to ADA-M version 1.
 
 ### Header Section
 
