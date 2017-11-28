@@ -30,16 +30,15 @@ message Header {
   }
 
   string matrixName                             = 1;
-  // int32 matrixID                             = 2;  // NOTE: Should we add a numerical matrixID to help ensure that matrices are unique?
-  string matrixVersion                          = 2;  // e.g., "1.0"
-  repeated string matrixReferences              = 3;  // e.g., publications, URLs, DOIs for the matrix - there can be many
+  string matrixVersion                          = 2;
+  repeated string matrixReferences              = 3;  // e.g., publications, URLs, DOIs for the resource - there can be many
   string matrixProfileCreateDate                = 4;
   repeated ProfileUpdates matrixProfileUpdates  = 5;
   string resourceName                           = 6;
-  repeated string resourceReferences            = 7;  // e.g., publications, URLs, DOIs for the resource - there can be many //NOTE: Is this redundant given the matrixReferences above?
+  repeated string resourceReferences            = 7;  // e.g., publications, URLs, DOIs for the resource - there can be many
   string resourceDescription                    = 8;  // Description of the resource such as a dataset
-  DataLevel.Level resourceDataLevel             = 9;  // NOTE: Should there be multiple options for this, i.e., repeated?  
-  repeated Contact resourceContactNames         = 10; // NOTE: name and email are set here as attributes of a Contact rather than having them as independent lists  
+  DataLevel.Level resourceDataLevel             = 9;
+  repeated Contact resourceContactNames         = 10;
   repeated string resourceContactOrganisations  = 11;
 }
 
@@ -130,15 +129,12 @@ message Profile {
   
   RestrictionsULF.Restrictions nonProfessional          = 17;
   repeated Description allowedNonProfessionals          = 18;
-  //NOTE: should type of professionals above be embedded within their own sub data structure? clinical professional could be for/not-for profit.
   
   RestrictionsULF nonProfitPurpose                      = 19;
   repeated Description allowedNonProfitPurposes         = 20;
 
   RestrictionsULF profitPurpose                         = 21;
   repeated Description allowedProfitPurposes            = 22;
-
-  //NOTE: Adopting a hirerachical data representation for each research types and clinical types
 
   // RESEARCH
   RestrictionsULF.Restrictions researchPurpose          = 23;
