@@ -4,6 +4,9 @@
 syntax = "proto3";
 package ADAM;
 
+option java_package = "org.ga4gh.adam";
+option java_multiple_files = true;
+
 message Header {
   
   message ProfileUpdates {
