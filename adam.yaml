@@ -1,0 +1,366 @@
+swagger: "2.0"
+
+info:
+  version: 1.0.0
+  title: ADA-M specification
+  description: The Automatable Discovery and Access Matrix (ADA-M) provides a standardized way to unambiguously represent the conditions related to data discovery and access. 
+
+paths: {}
+
+definitions:
+  AdamHeader:
+    type: object
+    required:
+      - matrixName
+      - matrixVersion
+      - matrixReferences
+      - matrixProfileCreateDate
+      - matrixProfileUpdates
+      - resourceName
+      - resourceReferences
+      - resourceDescription
+      - resourceDataLevel
+      - resourceContactNames
+      - resourceContactOrganisations
+    properties:
+      matrixName:
+        type: string
+      matrixVersion:
+        type: string
+      matrixReferences:
+        type: array
+        items:
+          type: string
+      matrixProfileCreateDate:
+        type: string
+        example: 2012-07-19 or 2017-01-17T20:33:40Z
+      matrixProfileUpdates:
+        $ref: "#/definitions/ProfileUpdates"
+      resourceName:
+        type: string
+      resourceReferences:
+        type: array
+        items:
+          type: string
+      resourceDescription:
+        type: string
+      resourceDataLevel:
+        $ref: "#/definitions/DataLevel"
+      resourceContactNames:
+        type: array
+        items:
+          $ref: "#/definitions/Contact"
+      resourceContactOrganisations:
+        type: array
+        items:
+          type: string
+  ProfileUpdates:
+    type: object
+    required:
+      - date
+      - description
+    properties:
+      date:
+        type: string
+        description: Date the change was made to the profile.
+        example: 2012-07-19 or 2017-01-17T20:33:40Z
+      description: 
+        type: string
+        description: Text describing the profile change made.
+  DataLevel:
+    type: object
+    required:
+      - level
+    properties:
+      level:
+        type: string
+        enum: 
+          - UNKNOWN
+          - DATABASE
+          - METADATA
+          - SUMMARISED
+          - DATASET
+          - RECORDSET
+          - RECORD
+          - RECORDFIELD
+  Contact:
+    type: object
+    required:
+      - name
+      - email
+    properties:
+      name:
+        type: string
+      email:
+        type: string
+  AdamProfile:
+    type: object
+    #required:
+    properties:
+      country:
+        $ref: "#/definitions/RestrictionsUL"        
+      allowedCountries:
+        type: array
+        items:
+          $ref: "#/definitions/ProfileDescription"
+      organisation:
+        $ref: "#/definitions/RestrictionsUL"
+      allowedOrganisations:
+        type: array
+        items:
+          $ref: "#/definitions/ProfileDescription"
+      nonProfitOrganisation:
+        $ref: "#/definitions/RestrictionsULF"
+      allowedNonProfitOrganisations:
+        type: array
+        items:
+          $ref: "#/definitions/ProfileDescription"
+      profitOrganisation:
+        $ref: "#/definitions/RestrictionsULF"
+      allowedProfitOrganisations:
+        type: array
+        items:
+          $ref: "#/definitions/ProfileDescription"
+      person:
+        $ref: "#/definitions/RestrictionsUL"
+      allowedPersons:
+        type: array
+        items:
+          $ref: "#/definitions/ProfileDescription"
+      academicProfessional:
+        $ref: "#/definitions/RestrictionsULF"
+      allowedAcademicProfessionals:
+        type: array
+        items:
+          $ref: "#/definitions/ProfileDescription"
+      clinicalProfessional:
+        $ref: "#/definitions/RestrictionsULF"
+      allowedClinicalProfessionals:
+        type: array
+        items:
+          $ref: "#/definitions/ProfileDescription"
+      profitProfessional:
+        $ref: "#/definitions/RestrictionsULF"
+      allowedProfitProfessionals:
+        type: array
+        items:
+          $ref: "#/definitions/ProfileDescription"
+      nonProfessional:
+        $ref: "#/definitions/RestrictionsULF"
+      allowedNonProfessionals:
+        type: array
+        items:
+          $ref: "#/definitions/ProfileDescription"
+      nonProfitPurpose:
+        $ref: "#/definitions/RestrictionsULF"
+      allowedNonProfitPurposes:
+        type: array
+        items:
+          $ref: "#/definitions/ProfileDescription"
+      profitPurpose:
+        $ref: "#/definitions/RestrictionsULF"
+      allowedProfitPurposes:
+        type: array
+        items:
+          $ref: "#/definitions/ProfileDescription"
+      researchPurpose:
+        $ref: "#/definitions/RestrictionsULF"
+      allowedResearchPurposes:
+        type: array
+        items:
+          $ref: "#/definitions/ProfileDescription"
+      allowedResearchProfiles:
+        type: array
+        items:
+          $ref: "#/definitions/ResearchDescription"
+      clinicalPurpose:
+        $ref: "#/definitions/RestrictionsULF"
+      allowedClinicalPurpose:
+        type: array
+        items:
+          $ref: "#/definitions/ProfileDescription"
+      allowedClinicalProfiles:
+        type: array
+        items:
+          $ref: "#/definitions/ClinicalDescription"
+  RestrictionsUL:
+    type: string
+    enum:
+      - UNRESTRICTED
+      - LIMITED
+  RestrictionsULF:
+    type: string
+    enum:
+      - UNRESTRICTED
+      - LIMITED
+      - UNRESTRICTED_OBLIGATORY
+      - LIMITED_OBLIGATORY
+      - FORBIDDEN
+  ProfileDescription:
+    type: object
+    required:
+      - description
+      - obligatory
+    properties:
+      description:
+        type: string
+      obligatory:
+        type: boolean
+  ResearchProfile:
+    type: string
+    enum:
+      - OTHER
+      - METHODS
+      - CONTROL
+      - POPULATION
+      - ANCESTRY
+      - BIOMEDICAL
+      - FUNDAMENTAL
+      - GENETIC
+      - DRUG
+      - DISEASE
+      - GENDER
+      - AGE
+  ResearchDescription:
+    type: object
+    properties:
+      type:
+        $ref: "#/definitions/ResearchProfile"
+      description:
+        type: string
+      restriction:
+        $ref: "#/definitions/RestrictionsULF"
+  ClinicalProfile:
+    type: string
+    enum:
+      - OTHER
+      - DECISION_SUPPORT
+      - DISEASE
+  ClinicalDescription:
+    type: object
+    properties:
+      type:
+        $ref: "#/definitions/ClinicalProfile"
+      description:
+        type: string
+      restriction:
+        $ref: "#/definitions/RestrictionsULF"
+  AdamTerms:
+    type: object
+    #required:
+    properties:
+      noAuthorizationTerms:
+        type: boolean
+        default: false
+      whichAuthorizationTerms:
+        type: array
+        items:
+          type: string
+      noPublicationTerms:
+        type: boolean
+        default: false
+      whichPublicationTerms:
+        type: array
+        items:
+          type: string
+      noTimelineTerms:
+        type: boolean
+        default: false
+      whichTimelineTerms:
+        type: array
+        items:
+          type: string
+      noSecurityTerms:
+        type: boolean
+      whichSecurityTerms:
+        type: array
+        items:
+          type: string
+      noExpungingTerms:
+        type: boolean
+        default: false
+      whichExpungingTerms:
+        type: array
+        items:
+          type: string
+      noLinkingTerms:
+        type: boolean
+        default: false
+      whichLinkingTerms:
+        type: array
+        items:
+          type: string
+      noRecontactTerms:
+        type: boolean
+        default: false
+      allowedRecontactTerms:
+        type: array
+        items:
+          type: string
+      compulsoryRecontactTerms:
+        type: array
+        items:
+          type: string
+      noIPClaimTerms:
+        type: boolean
+        default: false
+      whichIPClaimTerms:
+        type: array
+        items:
+          type: string
+      noReportingTerms:
+        type: boolean
+        default: false
+      whichReportingTerms:
+        type: array
+        items:
+          type: string
+      noCollaborationTerms:
+        type: boolean
+      whichCollaborationTerms:
+        type: array
+        items:
+          type: string
+      noPaymentTerms:
+        type: boolean
+        default: false
+      whichPaymentTerms:
+        type: array
+        items:
+          type: string
+  AdamMetaConditions:
+    type: object
+    required:
+      - sharingMode
+      - multipleObligationsRule
+    properties:
+      sharingMode:
+        $ref: "#/definitions/SharingMode"
+      multipleObligationsRule:
+        $ref: "#/definitions/MultipleObligationsRule"
+      noOtherConditions:
+        type: boolean
+        default: false
+      whichOtherConditions:
+        type: array
+        items:
+          type: string
+      sensitivePopulations:
+        type: boolean
+        default: false
+      uniformConsent:
+        type: boolean
+        default: false
+  SharingMode:
+    type: string
+    enum:
+      - UNKNOWN
+      - DISCOVERY
+      - ACCESS
+      - DISCOVERY_AND_ACCESS
+  MultipleObligationsRule:
+    type: string
+    enum:
+      - MEET_ALL_OBLIGATIONS
+      - MEET_AT_LEAST_ONE_OBLIGATION
+
