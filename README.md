@@ -4,11 +4,13 @@ The Automatable Discovery and Access Matrix (ADA-M) provides a standardized way 
 
 The ADA-M standard began development in late 2015 with the participation of over 50 volunteers form academia and industry and the first version (version 1.0) [published in late 2016](https://genomicsandhealth.org/work-products-demonstration-projects/automatable-discovery-and-access-matrix).
 
-Note: This repository has recently been ported from Protocol Buffer to the OpenAPI format in an effort to consolidate all GA4GH software to a common standard.
+## OpenAPI
+
+This repository has recently been ported from Protocol Buffer to the OpenAPI format in an effort to consolidate all GA4GH software to a common standard.
 
 Below are specifications and notes based on the Protocol Buffer version. We will be updating this documentation to reflect he OpenAPI standard shortly.
 
-## Protocol Buffer
+## Protocol Buffer (deprecated)
 
 This repository is focussed on providing an API implementation of ADA-M version 1.0 using [Protocol Buffer](https://developers.google.com/protocol-buffers/) for easy serialization of an ADA-M data description. Protocol Buffer makes it relatively easy to compile the .proto to your language of choice and facilitate the adoption of the ADA-M standard for collaboration in health and genomic data exchange.
 
