@@ -1,4 +1,4 @@
-# ADA-M
+# ADA-M [![](https://travis-ci.org/ga4gh/ADA-M.svg?branch=develop)](https://travis-ci.org/ga4gh/ADA-M) [![](https://img.shields.io/badge/license-Apache%202-blue.svg)](https://raw.githubusercontent.com/ga4gh/ADA-M/develop/LICENSE)
 
 The Automatable Discovery and Access Matrix (ADA-M) provides a standardized way to unambiguously represent the conditions related to data discovery and access. By adopting ADA-M, data custodians can generally describe what their data are (the Header section), who can access them (the Permissions section), terms related to their use (the Terms section), and special conditions (the Meta-Conditions). By doing so, data custodians can participate in data sharing and collaboration by making meta information about their data computer-readable and hence directly available for digital communication, searching and automation activities.
 
