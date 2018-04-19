@@ -4,8 +4,6 @@ The Automatable Discovery and Access Matrix (ADA-M) provides a standardized way 
 
 The ADA-M standard began development in late 2015 with the participation of over 50 volunteers form academia and industry and the first version (version 1.0) completed in late 2016. More about ADA-M is available on the [Regulatory and Ethics Toolkit page](https://www.ga4gh.org/ga4ghtoolkit/regulatoryandethics/).
 
-Note: this repository has recently been ported from Protocol Buffer to the OpenAPI format in an effort to consolidate all GA4GH software to a common standard.
-
 ## OpenAPI
 
 This repository is focussed on providing an API implementation of ADA-M version 1.0 using [OpenAPI Specifications](https://github.com/OAI/OpenAPI-Specification) to describe how to interface ADA-M API services. 
