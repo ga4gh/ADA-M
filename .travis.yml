@@ -4,14 +4,14 @@ sudo: false
 jdk:
   - oraclejdk8
 env:
-  - GH_URL=https://raw.githubusercontent.com VALIDATOR_URL=http://localhost:8080/api/debug?url FILE_TO_VALIDATE=adam.yaml URL_TO_VALIDATE=$GH_URL/${TRAVIS_PULL_REQUEST_SLUG:-$TRAVIS_REPO_SLUG}/${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}/$FILE_TO_VALIDATE
+  - GH_URL=https://raw.githubusercontent.com VALIDATOR_URL=http://localhost:8080/validator/debug?url FILE_TO_VALIDATE=adam.yaml URL_TO_VALIDATE=$GH_URL/${TRAVIS_PULL_REQUEST_SLUG:-$TRAVIS_REPO_SLUG}/${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}/$FILE_TO_VALIDATE
 before_install:
-  # This setup will not be needed once the online version of validator-badge supports OAS 3.0. Until then we'll need to set up a local version. Since there isn't a release supporting OAS 3.0 yet, we unfortunately need to build from source.
+  # This setup will not be needed once the online version of validator-badge supports OAS 3.0. Until then we'll need to set up a local version.
 
   # build and start validator-badge
-  - git clone --branch=2.0 https://github.com/swagger-api/validator-badge.git
+  - git clone --branch=v2.0.0 https://github.com/swagger-api/validator-badge.git
   - cd validator-badge
-  - mvn package -DskipTests=true -Dmaven.javadoc.skip=true -B -V jetty:run &
+  - mvn package -q -DskipTests=true -Dmaven.javadoc.skip=true -B -V jetty:run &
   - cd ..
   - sleep 60
 script:
@@ -22,8 +22,9 @@ script:
   # print validation errors
   - echo $VALIDATION_OUTPUT
 
-  # check if the validation output is an empty array, i.e. no errors
-  - test "$VALIDATION_OUTPUT" == "[]"
+  # check if the validation output ignoring warnings is an empty array
+  - VALIDATION_ERROR_COUNT=`echo "$VALIDATION_OUTPUT" |jq -c '.schemaValidationMessages // [] | map(select(.level != "warning"))' |jq length`
+  - test "$VALIDATION_ERROR_COUNT" == 0
 notifications:
   slack:
     secure: rYNke5z1vHsW53vg4EHyKfNCJt8KyfUAwji2x28MSuo6k741Wwp+xbqhTGdjmXNdUffsYj18ofe6DXPntC0a7SPzUc/FcGYx9xxUcaoLXl5x9MW9QkDpvcF34zM/O6g1QtORzu0aCA8jhuGZgdL9oFMab5ASjiqnD7wg7x/YQ3dbXguMOmk8QTi0QuEmdCqCjMHvKzd/rI/YKy/c9XSBXMxPeCQ7pKhtoVnzsDt7pWzCXlmtNUbdJ6YZYIkcF/03FkXcEuFtdzOdX7iC2aeD24ThRd7AKNKqeuibgA7qnZQxGqDFj8ijSkL3NQ7AS+WUinYLlR8SnLM0P3P3tB3aeKSrBlVZTrYNWcBGLbXbphXtqN4dE6FKpzPYoc45Pr9jedfNip6MV3DmK+5iFstpddCaHDG/MBbC38/Tz2AfiJFNrpjNNaofDD4tPtkvuoKwgyNmwJT4zwwxdCsnbA0hHexMoMuVP8jVOwZKqCkBYdEokmdKUSiFOu1dYqKQbChGy5BsrKRCw4vhYEHQZzxOtze2NWjoVw17QNzhw7jec2RZ0RK5KM6H58uwteKlPrk9rqkpArwe4wvkeJZPd9ryjVI8kxft6XOaMeQcqcyrQ1IEqYoBl0bEspm/mbIl5scX8XG6qDFHNMWQhb4ljIFY9prinN1rnjHmiZp28/T9/8s=
